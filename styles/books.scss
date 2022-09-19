@@ -1,0 +1,153 @@
+section.book-cover {
+  list-style: none;
+  margin: 0 auto 1.5em;
+  padding: 0;
+  width: 320px;
+  min-height: 240px;
+  background: #f8ecc2;
+  border-radius: 0.3em;
+  box-shadow: 0 0 0.5em 0.5em #f8ecc2;
+
+  h1 {
+    margin: 0;
+    padding: 1em 0 0;
+    font-size: 2em;
+    text-align: center;
+    font-variant: small-caps;
+  }
+
+  h2 {
+    margin: 0 0 0 0;
+    padding: 1em;
+    text-align: center;
+    font-size: 1.2em;
+  }
+
+  a:link, a:visited {
+    color: #000080;
+    text-decoration: none;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+}
+
+article.book {
+  background: #f8ecc2;
+  padding: 1em;
+  border-radius: 0.3em;
+
+  > h1 {
+    margin: 0;
+    padding: 0;
+    font-size: 2em;
+    font-variant: small-caps;
+  }
+
+  > h2 {
+    margin: 0;
+    padding: 0;
+    font-size: 1.4em;
+    font-variant: small-caps;
+    color: #444444;
+  }
+
+  section.part {
+    padding: 1em 1em 0;
+    border-bottom: solid #b3a888 1px;
+
+    > h1 {
+      margin: 0;
+      padding: 0;
+      font-size: 1.2em;
+      font-variant: small-caps;
+      color: #222222;
+      text-align: center;
+    }
+
+    > ul {
+      margin: 0;
+      padding: 0;
+
+      li {
+        list-style: none;
+        display: inline-block;
+        text-align: center;
+        margin: 0.3em;
+        min-width: 20px;
+
+        a:link, a:visited {
+          color: #000080;
+          text-decoration: none;
+        }
+
+        a:hover {
+          text-decoration: underline;
+          color: #0000ff;
+        }
+      }
+    }
+  }
+}
+
+.adjacent-parts, .adjacent-fragments {
+  ul {
+    margin: 0;
+    padding: 0;
+    min-height: 2em;
+
+    li {
+      list-style: none;
+      display: block;
+
+      &.previous {
+        float: left;
+
+        &:before {
+          content: '← '
+        }
+      }
+
+      &.next {
+        float: right;
+
+        &:after {
+          content: ' →'
+        }
+      }
+
+      a:link, a:visited {
+        color: #000080;
+        text-decoration: none;
+      }
+
+      a:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+.fragment {
+  h1 {
+    text-align: center;
+    margin: 0;
+    padding: 0;
+  }
+}
+
+
+.phrase {
+  margin: 1em 30px;
+
+  p {
+    margin: 0;
+  }
+}
+
+.dedication {
+  text-align: right;
+  font-style: italic;
+  margin-right: 30px;
+}
