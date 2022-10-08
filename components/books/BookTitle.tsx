@@ -1,10 +1,20 @@
 import Link from "next/link";
+import { Book } from "../../lib/types";
 
-const BookTitle = () => {
+const BookTitle = (props: { book: Book, link: boolean }) => {
+  const { book, link } = props
+  let heading
+
+  if (link) {
+    heading = <Link href={`/books/${book.slug}`}>{book.title}</Link>
+  } else {
+    heading = book.title
+  }
+
   return (
     <>
-      <h1><Link href={`/books/slug`}>Book Title</Link></h1>
-      <h2>Book subtitle</h2>
+      <h1>{heading}</h1>
+      <h2>{book.subtitle}</h2>
     </>
   )
 }

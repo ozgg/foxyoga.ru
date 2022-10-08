@@ -1,11 +1,11 @@
-import type {NextPage} from 'next'
+import type { NextPage } from 'next'
 import Head from "next/head";
 import BookCover from "../../components/books/BookCover";
 import { getBooks } from "../../lib/book-hanlder";
 import { Book } from "../../lib/types";
 
-const BooksPage: NextPage = (props: any) => {
-  const {books} = props
+const BooksPage: NextPage<{ books: Book[] }> = (props) => {
+  const { books } = props
 
   return (
     <>
@@ -14,7 +14,7 @@ const BooksPage: NextPage = (props: any) => {
       </Head>
 
       <article className="books">
-        {books.map((book: Book) => <BookCover key={book.slug} book={book}/>)}
+        {books.map((book) => <BookCover key={book.slug} book={book}/>)}
       </article>
     </>
   )

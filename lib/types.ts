@@ -5,3 +5,9 @@ export type Book = {
   dedication?: string,
   partCount: number
 }
+
+export type BookContext = {
+  params: {
+    slug: string
+  }
+}
