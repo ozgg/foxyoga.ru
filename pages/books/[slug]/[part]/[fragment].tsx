@@ -5,11 +5,12 @@ import AdjacentFragments from "../../../../components/books/AdjacentFragments";
 import BookFragment from "../../../../components/books/BookFragment";
 import AdjacentParts from "../../../../components/books/AdjacentParts";
 import BookTitle from "../../../../components/books/BookTitle";
-import { Book, BookContext } from "../../../../lib/types";
-import { getBook, getBooks } from "../../../../lib/book-hanlder";
+import { Book, BookFragmentContext } from "../../../../lib/types";
+import { getBook, getBooks } from "../../../../lib/book-handler";
 
-const BookFragmentPage: NextPage<{ book: Book }> = (props) => {
-  const { book } = props
+const BookFragmentPage: NextPage<{ book: Book, part: string, fragment: string }> = (props) => {
+  const { book, part, fragment } = props
+
   return (
     <>
       <Head>
@@ -21,7 +22,7 @@ const BookFragmentPage: NextPage<{ book: Book }> = (props) => {
         <AdjacentParts book={book}/>
 
         <section className="part">
-          <h1><Link href={`/books/${book.slug}/part`}>part.name</Link></h1>
+          <h1><Link href={`/books/${book.slug}/${part}`}>part.name</Link></h1>
 
           <AdjacentFragments book={book}/>
           <BookFragment/>
@@ -32,26 +33,35 @@ const BookFragmentPage: NextPage<{ book: Book }> = (props) => {
   )
 }
 
-export function getStaticProps(context: BookContext) {
+export function getStaticProps(context: BookFragmentContext) {
   const slug = context.params.slug
 
   return {
     props: {
-      book: getBook(slug)
+      book: getBook(slug),
+      part: context.params.part,
+      fragment: context.params.fragment
     }
   }
 }
 
 export function getStaticPaths() {
   const books = getBooks()
+  const paths: BookFragmentContext[] = []
 
-  const paths = books.map(book => ({
-    params: {
-      slug: book.slug,
-      part: 'part',
-      fragment: 'fragment'
-    }
-  }))
+  books.forEach(book => {
+    book.parts.forEach(part => {
+      for (let f = part.fragments[0]; f <= part.fragments[1]; f++) {
+        paths.push({
+          params: {
+            slug: book.slug,
+            part: part.slug,
+            fragment: f.toString()
+          }
+        })
+      }
+    })
+  })
 
   return {
     paths: paths,

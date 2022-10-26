@@ -1,7 +1,7 @@
 import type { NextPage } from 'next'
 import Head from "next/head";
 import BookCover from "../../components/books/BookCover";
-import { getBooks } from "../../lib/book-hanlder";
+import { getBooks } from "../../lib/book-handler";
 import { Book } from "../../lib/types";
 
 const BooksPage: NextPage<{ books: Book[] }> = (props) => {

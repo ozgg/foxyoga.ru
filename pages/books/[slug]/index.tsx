@@ -2,8 +2,9 @@ import type { NextPage, NextPageContext } from 'next'
 import Head from "next/head";
 import BookTitle from "../../../components/books/BookTitle";
 import BookPart from "../../../components/books/BookPart";
-import { getBooks, getBook } from "../../../lib/book-hanlder";
+import { getBooks, getBook } from "../../../lib/book-handler";
 import { Book, BookContext } from "../../../lib/types";
+import Dedication from "../../../components/books/Dedication";
 
 const BookPage: NextPage<{ book: Book }> = (props) => {
   const { book } = props
@@ -16,13 +17,8 @@ const BookPage: NextPage<{ book: Book }> = (props) => {
 
       <article className="book">
         <BookTitle book={book} link={false}/>
-
-        <div className="dedication">
-          book.dedication.gsub(\n, br/
-        </div>
-
-        book.parts.order(priority asc).all:
-        <BookPart book={book}/>
+        <Dedication text={book.dedication}/>
+        {book.parts.map(part => <BookPart key={part.slug} book={book} part={part}/>)}
       </article>
     </>
   )

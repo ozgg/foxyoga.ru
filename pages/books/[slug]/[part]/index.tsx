@@ -3,11 +3,11 @@ import Head from 'next/head'
 import BookTitle from "../../../../components/books/BookTitle";
 import AdjacentParts from "../../../../components/books/AdjacentParts";
 import BookPart from "../../../../components/books/BookPart";
-import { Book, BookContext } from "../../../../lib/types";
-import { getBook, getBooks } from "../../../../lib/book-hanlder";
+import { Book, BookPartContext } from "../../../../lib/types";
+import { getBook, getBooks } from "../../../../lib/book-handler";
 
-const BookPartPage: NextPage<{ book: Book }> = (props) => {
-  const { book } = props
+const BookPartPage: NextPage<{ book: Book, part: string }> = (props) => {
+  const { book, part } = props
 
   return (
     <>
@@ -18,26 +18,33 @@ const BookPartPage: NextPage<{ book: Book }> = (props) => {
       <article className="book">
         <BookTitle book={book} link={true}/>
         <AdjacentParts book={book}/>
-        <BookPart book={book}/>
+        <BookPart book={book} part={book.parts.filter(i => (i.slug === part))[0]}/>
       </article>
     </>
   )
 }
 
-export function getStaticProps(context: BookContext) {
+export function getStaticProps(context: BookPartContext) {
   const slug = context.params.slug
+  const part = context.params.part
 
   return {
     props: {
-      book: getBook(slug)
+      book: getBook(slug),
+      part: part
     }
   }
 }
 
 export function getStaticPaths() {
   const books = getBooks()
+  const paths: BookPartContext[] = []
 
-  const paths = books.map(book => ({ params: { slug: book.slug, part: 'part' } }))
+  books.forEach((book) => {
+    book.parts.forEach((part) => {
+      paths.push({ params: { slug: book.slug, part: part.slug } })
+    })
+  })
 
   return {
     paths: paths,

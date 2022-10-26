@@ -2,9 +2,77 @@ yoga:
   title: "Лисья йога"
   subtitle: "Письма Чёрного Лиса продвинутым существам"
   dedication: "Посвящается той, которая\nв любом пространстве постоянно\nтолкает меня на внутренние\nизыскания &mdash; ты знаешь,\nкак тебя зовут в этот час."
-  partCount: 13
+  parts:
+    -
+      slug: "intro"
+      name: "Вступление"
+      fragments: [1, 3]
+    -
+      slug: "general-provisions"
+      name: "1. Общие положения"
+      fragments: [1, 42]
+    -
+      slug: "realness-tales-beginning"
+      name: "2. Реальностные сказки (начало)"
+      fragments: [1, 43]
+    -
+      slug: "realness-tales-continuation"
+      name: "3. Реальностные сказки (продолжение)"
+      fragments: [1, 34]
+    -
+      slug: "realness-tales-ending"
+      name: "4. Реальностные сказки (окончание)"
+      fragments: [1, 41]
+    -
+      slug: "capture-of-universe-on-the-way"
+      name: "5. Захват вселенной (на пути)"
+      fragments: [1, 33]
+    -
+      slug: "capture-group"
+      name: "6. Группа Захвата"
+      fragments: [1, 38]
+    -
+      slug: "dealings-of-god"
+      name: "7. Божественные делишки"
+      fragments: [1, 42]
+    -
+      slug: "walks-over-infinity"
+      name: "8. Прогулки по Бесконечности"
+      fragments: [1, 42]
+    -
+      slug: "towards-the-storm"
+      name: "9. Навстречу грозе"
+      fragments: [1, 22]
+    -
+      slug: "lord-walked-upon-the-street"
+      name: "10. Шёл по улице Господь"
+      fragments: [1, 41]
+    -
+      slug: "end-of-all-tales"
+      name: "11. Конец всех сказок"
+      fragments: [1, 85]
+    -
+      slug: "conclusion"
+      name: "Заключение"
+      fragments: [1, 2]
 flowers:
   title: "Цветы глухих улиц"
   subtitle: "За пределами лисьей йоги"
   dedication: "Посвящается той, которая придет\nпосле — это цветы для тебя.\n\n\n\n"
-  partCount: 4
+  parts:
+    -
+      slug: "intro"
+      name: "Вступление"
+      fragments: [1, 4]
+    -
+      slug: "kings-of-silence"
+      name: "Короли молчания"
+      fragments: [1, 32]
+    -
+      slug: "south-western-outskirts"
+      name: "Юго-западная окраина"
+      fragments: [0, 50]
+    -
+      slug: "meadow-lands"
+      name: "Луговые земли"
+      fragments: [0, 41]

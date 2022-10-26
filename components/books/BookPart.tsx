@@ -1,21 +1,21 @@
 import Link from "next/link";
-import { Book } from "../../lib/types";
+import { Book, BookPartInList } from "../../lib/types";
+import Dedication from "./Dedication";
 
-const BookPart = (props: { book: Book }) => {
-  const { book } = props
+const BookPart = (props: { book: Book, part: BookPartInList }) => {
+  const { book, part } = props
+
+  const fragments = []
+  for (let f = part.fragments[0]; f <= part.fragments[1]; f++) {
+    const href = `/books/${book.slug}/${part.slug}/${f}`
+    fragments.push(<li key={`f-${f}`}><Link href={href}>{f}</Link></li>)
+  }
 
   return (
     <section className="part">
-      <h1>part.name</h1>
-      % unless part.dedication.blank? %
-      <div className="dedication">
-        raw part.dedication.gsub(\n, br/)
-      </div>
+      <h1>{part.name}</h1>
 
-      % part.fragments.order(id asc).each do |fragment|
-      <ul>
-        <li><Link href={`/books/${book.slug}/part/fragment`}>fragment</Link></li>
-      </ul>
+      <ul>{fragments}</ul>
     </section>
   )
 }
