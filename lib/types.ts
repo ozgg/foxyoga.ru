@@ -12,6 +12,13 @@ export type Book = {
   parts: BookPartInList[]
 }
 
+export type BookPartFragment = {
+  slug: string,
+  dedication?: string,
+  body: string,
+  raw?: boolean
+}
+
 export type BookContext = {
   params: {
     slug: string
