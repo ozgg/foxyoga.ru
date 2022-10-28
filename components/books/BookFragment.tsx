@@ -1,8 +1,17 @@
 import { BookPartFragment } from "../../lib/types";
+import Dedication from "./Dedication";
 
 const BookFragment = (props: { fragment: BookPartFragment }) => {
   const { fragment } = props
+  let dedication: JSX.Element[] = []
   let content
+
+  if (fragment.dedication) {
+    fragment.dedication.split('|').forEach((chunk, i) => {
+      dedication.push(<Dedication key={`dedication-${i}`} text={chunk}/> )
+    })
+  }
+
   if (fragment.raw) {
     content = <div dangerouslySetInnerHTML={{__html: fragment.body}}/>
   } else {
@@ -16,11 +25,7 @@ const BookFragment = (props: { fragment: BookPartFragment }) => {
   return (
     <section className="fragment">
       <h1>Фрагмент {fragment.slug}</h1>
-      fragment.dedication.split(|).each do |dedication|
-      <div className="dedication">
-        {fragment.dedication ?? ''}
-        raw dedication.gsub(\n, br)
-      </div>
+      {dedication.length > 0 && dedication}
       {content}
     </section>
   )

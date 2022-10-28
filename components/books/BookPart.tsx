@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { Book, BookPartInList } from "../../lib/types";
-import Dedication from "./Dedication";
 
 const BookPart = (props: { book: Book, part: BookPartInList }) => {
   const { book, part } = props

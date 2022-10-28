@@ -3,35 +3,35 @@ import Head from 'next/head'
 import BookTitle from "../../../../components/books/BookTitle";
 import AdjacentParts from "../../../../components/books/AdjacentParts";
 import BookPart from "../../../../components/books/BookPart";
-import { Book, BookPartContext } from "../../../../lib/types";
-import { getBook, getBooks } from "../../../../lib/book-handler";
+import { Book, BookPartContext, BookPartInList } from "../../../../lib/types";
+import { getBook, getBooks, getPart } from "../../../../lib/book-handler";
 
-const BookPartPage: NextPage<{ book: Book, part: string }> = (props) => {
+const BookPartPage: NextPage<{ book: Book, part: BookPartInList }> = (props) => {
   const { book, part } = props
 
   return (
     <>
       <Head>
-        <title>part.long_title</title>
+        <title>{book.title}: {part.name}</title>
       </Head>
 
       <article className="book">
         <BookTitle book={book} link={true}/>
-        <AdjacentParts book={book}/>
-        <BookPart book={book} part={book.parts.filter(i => (i.slug === part))[0]}/>
+        <AdjacentParts book={book} part={part}/>
+        <BookPart book={book} part={part}/>
       </article>
     </>
   )
 }
 
 export function getStaticProps(context: BookPartContext) {
-  const slug = context.params.slug
-  const part = context.params.part
+  const {slug, part} = context.params
+  const book = getBook(slug)
 
   return {
     props: {
-      book: getBook(slug),
-      part: part
+      book,
+      part: getPart(book, part)
     }
   }
 }

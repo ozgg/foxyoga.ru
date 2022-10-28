@@ -23,12 +23,12 @@ const BookFragmentPage: NextPage<{ book: Book, part: BookPartInList, fragment: B
   return (
     <>
       <Head>
-        <title>part.long_title, фрагмент fragment.slug</title>
+        <title>{book.title}: {part.name}, фрагмент {fragment.slug}</title>
       </Head>
 
       <article className="book">
         <BookTitle book={book} link={true}/>
-        <AdjacentParts book={book}/>
+        <AdjacentParts book={book} part={part}/>
 
         <section className="part">
           <h1><Link href={`/books/${book.slug}/${part.slug}`}>{part.name}</Link></h1>
