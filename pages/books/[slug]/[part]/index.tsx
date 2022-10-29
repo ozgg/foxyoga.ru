@@ -8,11 +8,12 @@ import { getBook, getBooks, getPart } from "../../../../lib/book-handler";
 
 const BookPartPage: NextPage<{ book: Book, part: BookPartInList }> = (props) => {
   const { book, part } = props
+  const title = `${book.title}: ${part.name}`
 
   return (
     <>
       <Head>
-        <title>{book.title}: {part.name}</title>
+        <title>{title}</title>
       </Head>
 
       <article className="book">

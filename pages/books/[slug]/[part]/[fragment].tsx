@@ -19,11 +19,12 @@ import {
 
 const BookFragmentPage: NextPage<{ book: Book, part: BookPartInList, fragments: BookFragments }> = (props) => {
   const { book, part, fragments } = props
+  const title = `${book.title}: ${part.name}, фрагмент ${fragments.current.slug}`
 
   return (
     <>
       <Head>
-        <title>{book.title}: {part.name}, фрагмент {fragments.current.slug}</title>
+        <title>{title}</title>
       </Head>
 
       <article className="book">

@@ -4,7 +4,7 @@ import React from "react";
 const Layout = (props: { children: React.ReactNode }) => {
   return (
     <>
-      <header>
+      <header className="main-header">
         <nav>
           <ul>
             <li><Link href="/books">Книги</Link></li>
@@ -12,8 +12,8 @@ const Layout = (props: { children: React.ReactNode }) => {
           </ul>
         </nav>
       </header>
-      <main>{props.children}</main>
-      <footer>
+      <main id="main">{props.children}</main>
+      <footer className="main-footer">
         <div className="copyright">
           <p>&#0169; foxyoga.ru 2009&ndash;2010, 2015, 2022.</p>
           <p>Все права на произведения «Лисья Йога» и «Цветы глухих улиц» принадлежат <em>Чёрному Лису</em>.</p>
