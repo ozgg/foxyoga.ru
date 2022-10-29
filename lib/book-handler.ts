@@ -1,7 +1,7 @@
 import fs from 'fs'
 import path from 'path'
 import YAML from 'yaml'
-import { Book, BookPartFragment, BookPartInList } from "./types";
+import { Book, BookFragments, BookPartFragment, BookPartInList } from "./types";
 import BookPart from "../components/books/BookPart";
 
 const dataDirectory = path.join(process.cwd(), 'data')
@@ -37,12 +37,30 @@ export function getPart(book: Book, part: string): BookPartInList {
   throw `Cannot find part "${part}"`
 }
 
-export function getFragment(slug: string, part: string, fragment: string): BookPartFragment|undefined {
+export function getFragments(slug: string, part: string, fragment: string): BookFragments {
   const bookSlug = slug.replaceAll(/[^a-z]/g, '')
   const partSlug = part.replaceAll(/[^-a-z]/g, '')
   const fragmentSlug = fragment.replaceAll(/\D/g, '')
   const data = fs.readFileSync(`${dataDirectory}/books/${bookSlug}/${partSlug}.yml`, 'utf-8')
   const parsedData = YAML.parse(data)
 
-  return {slug: fragmentSlug, ...parsedData[fragmentSlug]}
+  if (!parsedData.hasOwnProperty(fragmentSlug)) {
+    throw `Cannot find fragment ${bookSlug}/${partSlug}/${fragmentSlug}`
+  }
+
+  const result: BookFragments = {
+    current: {slug: fragmentSlug, ...parsedData[fragmentSlug]}
+  }
+
+  const previousFragmentSlug = (parseInt(fragmentSlug) - 1).toString()
+  if (parsedData.hasOwnProperty(previousFragmentSlug)) {
+    result.previous = {slug: previousFragmentSlug, ...parsedData[previousFragmentSlug]}
+  }
+
+  const nextFragmentSlug = (parseInt(fragmentSlug) + 1).toString()
+  if (parsedData.hasOwnProperty(nextFragmentSlug)) {
+    result.next = {slug: nextFragmentSlug, ...parsedData[nextFragmentSlug]}
+  }
+
+  return result
 }

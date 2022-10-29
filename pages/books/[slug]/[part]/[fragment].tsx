@@ -7,23 +7,23 @@ import AdjacentParts from "../../../../components/books/AdjacentParts";
 import BookTitle from "../../../../components/books/BookTitle";
 import {
   Book,
-  BookFragmentContext, BookPartFragment,
+  BookFragmentContext, BookFragments,
   BookPartInList
 } from "../../../../lib/types";
 import {
   getBook,
   getBooks,
-  getFragment,
+  getFragments,
   getPart
 } from "../../../../lib/book-handler";
 
-const BookFragmentPage: NextPage<{ book: Book, part: BookPartInList, fragment: BookPartFragment }> = (props) => {
-  const { book, part, fragment } = props
+const BookFragmentPage: NextPage<{ book: Book, part: BookPartInList, fragments: BookFragments }> = (props) => {
+  const { book, part, fragments } = props
 
   return (
     <>
       <Head>
-        <title>{book.title}: {part.name}, фрагмент {fragment.slug}</title>
+        <title>{book.title}: {part.name}, фрагмент {fragments.current.slug}</title>
       </Head>
 
       <article className="book">
@@ -33,9 +33,9 @@ const BookFragmentPage: NextPage<{ book: Book, part: BookPartInList, fragment: B
         <section className="part">
           <h1><Link href={`/books/${book.slug}/${part.slug}`}>{part.name}</Link></h1>
 
-          <AdjacentFragments book={book}/>
-          <BookFragment fragment={fragment}/>
-          <AdjacentFragments book={book}/>
+          <AdjacentFragments book={book} part={part} fragments={fragments}/>
+          <BookFragment fragment={fragments.current}/>
+          <AdjacentFragments book={book} part={part} fragments={fragments}/>
         </section>
       </article>
     </>
@@ -50,7 +50,7 @@ export function getStaticProps(context: BookFragmentContext) {
     props: {
       book,
       part: getPart(book, part),
-      fragment: getFragment(slug, part, fragment)
+      fragments: getFragments(slug, part, fragment)
     }
   }
 }

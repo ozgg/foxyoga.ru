@@ -19,6 +19,12 @@ export type BookPartFragment = {
   raw?: boolean
 }
 
+export type BookFragments = {
+  current: BookPartFragment,
+  previous?: BookPartFragment,
+  next?: BookPartFragment
+}
+
 export type BookContext = {
   params: {
     slug: string
