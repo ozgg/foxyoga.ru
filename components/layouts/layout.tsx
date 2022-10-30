@@ -1,5 +1,6 @@
 import Link from "next/link"
 import React from "react";
+import Metrics from "../Metrics";
 
 const Layout = (props: { children: React.ReactNode }) => {
   return (
@@ -20,6 +21,7 @@ const Layout = (props: { children: React.ReactNode }) => {
           <p>Никакое воспроизведение или копирование текста не допускается без письменного согласия автора.</p>
         </div>
       </footer>
+      <Metrics/>
     </>
   )
 }
